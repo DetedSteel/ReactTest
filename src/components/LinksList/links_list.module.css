@@ -1,0 +1,53 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  background-color: bisque;
+  border: none;
+  outline: none;
+}
+
+.active {
+  background-color: gray;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link_info {
+  padding: 10px;
+  border: 2px solid brown;
+  border-radius: 6px;
+  background-color: bisque;
+  width: 600px;
+}
+
+.links_container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logout {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.create_link {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
