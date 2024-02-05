@@ -66,7 +66,7 @@ export const LinksList: FC = () => {
       </button>
       <form className={styles.create_link} onSubmit={handleSubmit(onSubmit)}>
         <input type="text" {...(register('link'), { required: true })} className="input" />
-        {errors.link && <span className='error_text'>Link is required</span>}
+        {errors.link && <span className="error_text">Link is required</span>}
         <input type="submit" value="Create new link" className="button" />
       </form>
       <select
@@ -85,9 +85,16 @@ export const LinksList: FC = () => {
       <div className={styles.links_container}>
         {links?.map((link) => (
           <div key={link.id} className={styles.link_info}>
-            <p>Long: {link.target}</p>
-            <p>Short: https://front-test.hex.team/s/{link.short}</p>
-            <p>Redirects: {link.counter}</p>
+            <p className="table_text border">Long: {link.target}</p>
+            <p
+              className="table_text border"
+              onClick={() => {
+                navigator.clipboard.writeText(`https://front-test.hex.team/s/${link.short}`);
+              }}
+            >
+              Short: https://front-test.hex.team/s/{link.short}
+            </p>
+            <p className='table_text'>Redirects: {link.counter}</p>
           </div>
         ))}
       </div>

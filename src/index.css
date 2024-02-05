@@ -67,3 +67,13 @@
   align-items: center;
   justify-content: center;
 }
+
+.table_text {
+  padding: 0 10px 0 10px;
+  padding-bottom: 8px;
+}
+
+.border {
+  padding: 0 10px 10px 10px;
+  border-bottom: 2px solid brown;
+}
