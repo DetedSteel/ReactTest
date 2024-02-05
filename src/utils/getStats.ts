@@ -10,15 +10,6 @@ export async function getStats(limit: number, offset: number, order: string) {
       },
     }
   );
-
-  // const ids = localStorage.getItem('myLinks');
-  // if (ids) {
-  //   const data: linkT[] = res.data.filter((e: linkT) => JSON.parse(ids).includes(e.id));
-  //   console.log(data);
-  //   return { links: data, count: Math.ceil(data.length / 10) };
-  // } else {
-  //   return { links: [], count: 0 };
-  // }
   console.log(res);
 
   return { links: res.data as linkT[], count: res.headers['x-total-count'] };
