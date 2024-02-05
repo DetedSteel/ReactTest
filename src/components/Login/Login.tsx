@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { userT } from '../Register/Register';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +14,8 @@ export const Login: FC = () => {
 
   const navigate = useNavigate();
 
+  const [loginError, setLoginError] = useState(false);
+
   const onSubmit: SubmitHandler<userT> = (data) => {
     console.log(data);
     axios
@@ -26,7 +28,10 @@ export const Login: FC = () => {
         }
         console.log(response);
       })
-      .catch((errors) => console.log(errors));
+      .catch((errors) => {
+        setLoginError(true);
+        console.log(errors);
+      });
   };
 
   if (localStorage.getItem('username')) {
@@ -34,15 +39,39 @@ export const Login: FC = () => {
   }
 
   return (
-    <div className='login_container'>
-      <form className='login_form' action="" onSubmit={handleSubmit(onSubmit)}>
-        <input className='input' placeholder="login" type="text" {...register('username', { required: true })} />
-        {errors.username && <span>Login is required</span>}
-        <input className='input' type="text" placeholder="password" {...register('password', { required: true })} />
-        {errors.password && <span>Password is required</span>}
-        <input className='button' value='Login' type="submit" />
+    <div className="login_container">
+      {loginError && (
+        <div className="error_popup">
+          <p>Wrong password</p>
+          <button onClick={() => setLoginError(false)} className="button">
+            Back
+          </button>
+        </div>
+      )}
+      <form className="login_form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="input_container">
+          <input
+            className="input"
+            placeholder="login"
+            type="text"
+            {...register('username', { required: true })}
+          />
+          {errors.username && <span className="error_text">Login is required</span>}
+        </div>
+        <div className="input_container">
+          <input
+            className="input"
+            type="password"
+            placeholder="password"
+            {...register('password', { required: true })}
+          />
+          {errors.password && <span className="error_text">Password is required</span>}
+        </div>
+        <input className="button" value="Login" type="submit" />
       </form>
-      <Link className='button' to={'/register'}>Register</Link>
+      <Link className="button" to={'/register'}>
+        Register
+      </Link>
     </div>
   );
 };

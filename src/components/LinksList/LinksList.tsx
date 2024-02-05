@@ -11,7 +11,11 @@ export type linkT = { id: number; short: string; target: string; counter: number
 export const LinksList: FC = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<squeezeT>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<squeezeT>();
 
   const [links, setLinks] = useState<linkT[]>();
   const [page, setPage] = useState<number>(0);
@@ -52,19 +56,21 @@ export const LinksList: FC = () => {
     <div className={styles.container}>
       <h1>You are logged in as {localStorage.getItem('username')}</h1>
       <button
-      className={`button ${styles.logout}`}
+        className={`button ${styles.logout}`}
         onClick={() => {
           localStorage.removeItem('username');
           navigate('/login');
         }}
       >
-        logOut
+        Logout
       </button>
       <form className={styles.create_link} onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" {...register('link')} className='input' />
-        <input type="submit" value='Create new link' className='button' />
+        <input type="text" {...(register('link'), { required: true })} className="input" />
+        {errors.link && <span className='error_text'>Link is required</span>}
+        <input type="submit" value="Create new link" className="button" />
       </form>
-      <select className='button'
+      <select
+        className="button"
         onChange={(e) => {
           setSort(e.target.value);
         }}

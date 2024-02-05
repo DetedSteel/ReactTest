@@ -37,3 +37,33 @@
   outline: none;
   border-radius: 6px;
 }
+
+.input_container {
+  position: relative;
+}
+
+.error_text {
+  color: red;
+  font-size: 10px;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.error_popup {
+  width: 500px;
+  height: 500px;
+  background-color: bisque;
+  border: 2px solid brown;
+  border-radius: 12px;
+  position: fixed;
+  top: calc(50vh - 250px);
+  left: calc(50vw - 250px);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
